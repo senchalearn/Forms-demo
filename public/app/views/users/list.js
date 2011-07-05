@@ -9,7 +9,22 @@ App.views.UsersList = Ext.extend(Ext.Panel, {
                     dock: 'top',
                     xtype: 'toolbar',
                     title: 'Users',
-                    items: []
+                    items: [
+                        { xtype: 'spacer' },
+                        {
+                            itemId: 'addButton',
+                            iconCls: 'add',
+                            iconMask: true,
+                            ui: 'plain',
+                            handler: function() {
+                                Ext.dispatch({
+                                    controller: 'Users',
+                                    action: 'newForm'
+                                })
+                            },
+                            scope: this
+                        }
+                    ]
                 }
             ],
             items: [
