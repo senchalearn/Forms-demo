@@ -1,43 +1,45 @@
 App.views.UsersList = Ext.extend(Ext.Panel, {
     initComponent: function(){
+        var addButton, titlebar, list;
+
+        addButton = {
+            itemId: 'addButton',
+            iconCls: 'add',
+            iconMask: true,
+            ui: 'plain',
+            handler: this.onAddAction,
+            scope: this
+        };
+
+        titlebar = {
+            dock: 'top',
+            xtype: 'toolbar',
+            title: 'Users',
+            items: [ { xtype: 'spacer' }, addButton ]
+        };
+
+        list = {
+            xtype: 'list',
+            itemTpl: '{name}',
+            store: App.stores.users,
+            emptyText: '<div class="emptytext">There are no users in the system at the moment.</div>',
+        };
+
         Ext.apply(this, {
             html: 'placeholder',
             layout: 'fit',
-            
-            dockedItems: [
-                {
-                    dock: 'top',
-                    xtype: 'toolbar',
-                    title: 'Users',
-                    items: [
-                        { xtype: 'spacer' },
-                        {
-                            itemId: 'addButton',
-                            iconCls: 'add',
-                            iconMask: true,
-                            ui: 'plain',
-                            handler: function() {
-                                Ext.dispatch({
-                                    controller: 'Users',
-                                    action: 'newForm'
-                                })
-                            },
-                            scope: this
-                        }
-                    ]
-                }
-            ],
-            items: [
-                {
-                    xtype: 'list',
-                    itemTpl: '{name}',
-                    store: App.stores.users,
-                    emptyText: '<div class="emptytext">There are no users in the system at the moment.</div>',
-                }
-            ]
+            dockedItems: [titlebar],
+            items: [list]
         });
 
         App.views.UsersList.superclass.initComponent.call(this);
+    },
+
+    onAddAction: function() {
+        Ext.dispatch({
+            controller: 'Users',
+            action: 'newForm'
+        });
     }
 });
 
