@@ -1,6 +1,6 @@
 App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
     initComponent: function(){
-        var titlebar, cancelButton, fields;
+        var titlebar, cancelButton, buttonbar, saveButton, fields;
 
         cancelButton = {
             text: 'cancel',
@@ -14,9 +14,22 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             items: [ cancelButton ]
         };
 
+        saveButton = {
+            text: 'save',
+            ui: 'confirm',
+            handler: this.onSaveAction,
+            scope: this
+        };
+
+        buttonbar = {
+            xtype: 'toolbar',
+            dock: 'bottom',
+            items: [{xtype: 'spacer'}, saveButton]
+        };
+
         fields = {
             xtype: 'fieldset',
-            id:	'userFormFieldset',
+            id: 'userFormFieldset',
             title: 'User details',
             instructions: 'Please enter the information above.',
             defaults: {
@@ -41,7 +54,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
 
         Ext.apply(this, {
             scroll: 'vertical',
-            dockedItems: [ titlebar ],
+            dockedItems: [ titlebar, buttonbar ],
             items: [ fields ]
         });
 
@@ -53,7 +66,17 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             controller: 'Users',
             action: 'showList'
         });
+    },
+
+    onSaveAction: function() {
+        Ext.dispatch({
+            controller: 'Users',
+            action: 'save',
+            data      : this.getValues(),
+            record    : this.getRecord()
+        });
     }
+
 });
 
 Ext.reg('App.views.UsersForm', App.views.UsersForm);

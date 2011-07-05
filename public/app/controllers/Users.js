@@ -22,6 +22,12 @@ Ext.regController('Users', {
             }
         );
 
+    },
+
+    save: function(params) {
+        params.record.set(params.data);
+        App.stores.users.create(params.data);
+        this.showList();
     }
 
 });
