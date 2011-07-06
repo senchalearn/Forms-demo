@@ -105,7 +105,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
     onCancelAction: function() {
         Ext.dispatch({
             controller: 'Users',
-            action: 'showList'
+            action: 'index'
         });
     },
 

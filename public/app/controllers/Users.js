@@ -1,7 +1,7 @@
 Ext.regController('Users', {
     store: App.stores.users,
 
-    showList: function() {
+    index: function() {
         App.views.viewport.reveal('usersList');
     },
 
@@ -22,7 +22,7 @@ Ext.regController('Users', {
         var errors = params.record.validate()
         if (errors.isValid()) {
             this.store.create(params.data);
-            this.showList();
+            this.index();
         } else {
             params.form.showErrors(errors);
         }
@@ -33,7 +33,7 @@ Ext.regController('Users', {
         var errors = params.record.validate()
         if (errors.isValid()) {
             params.record.save();
-            this.showList();
+            this.index();
         } else {
             params.form.showErrors(errors);
         }
@@ -42,7 +42,7 @@ Ext.regController('Users', {
     remove: function(params) {
         this.store.remove(params.record);
         this.store.sync();
-        this.showList();
+        this.index();
     }
 
 });
