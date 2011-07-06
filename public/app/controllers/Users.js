@@ -2,19 +2,19 @@ Ext.regController('Users', {
     store: App.stores.users,
 
     showList: function() {
-        App.views.viewport.reveal('list');
+        App.views.viewport.reveal('usersList');
     },
 
     newForm: function() {
         var model = new App.models.User()
         App.views.usersForm.load(model);
-        App.views.viewport.reveal('form');
+        App.views.viewport.reveal('usersForm');
     },
 
     editForm: function(options) {
         var model = this.store.getAt(options.index);
         App.views.usersForm.load(model);
-        App.views.viewport.reveal('form');
+        App.views.viewport.reveal('usersForm');
     },
 
     save: function(params) {

@@ -13,14 +13,10 @@ App.views.Viewport = Ext.extend(Ext.Panel, {
     },
 
     reveal: function(target) {
-        if (target === 'form') {
-            this.setActiveItem(App.views.usersForm,
-                { type: 'slide', direction: 'left' }
-            );
-        } else if (target === 'list') {
-            this.setActiveItem(App.views.usersList,
-                { type: 'slide', direction: 'right' }
-            );
-        }
+        var direction = (target === 'usersList') ? 'right' : 'left'
+        this.setActiveItem(
+            App.views[target],
+            { type: 'slide', direction: direction }
+        );
     }
 });
