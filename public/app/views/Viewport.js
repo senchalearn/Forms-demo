@@ -10,5 +10,17 @@ App.views.Viewport = Ext.extend(Ext.Panel, {
             ]
         });
         App.views.Viewport.superclass.initComponent.apply(this, arguments);
+    },
+
+    reveal: function(target) {
+        if (target === 'form') {
+            this.setActiveItem(App.views.usersForm,
+                { type: 'slide', direction: 'left' }
+            );
+        } else if (target === 'list') {
+            this.setActiveItem(App.views.usersList,
+                { type: 'slide', direction: 'right' }
+            );
+        }
     }
 });

@@ -2,40 +2,19 @@ Ext.regController('Users', {
     store: App.stores.users,
 
     showList: function() {
-        App.views.viewport.setActiveItem(
-            App.views.usersList,
-            {
-                type: 'slide',
-                direction: 'right'
-            }
-        );
+        App.views.viewport.reveal('list');
     },
 
     newForm: function() {
         var model = new App.models.User()
         App.views.usersForm.load(model);
-
-        App.views.viewport.setActiveItem(
-            App.views.usersForm,
-            {
-                type: 'slide',
-                direction: 'left'
-            }
-        );
-
+        App.views.viewport.reveal('form');
     },
 
     editForm: function(options) {
         var model = this.store.getAt(options.index);
         App.views.usersForm.load(model);
-
-        App.views.viewport.setActiveItem(
-            App.views.usersForm,
-            {
-                type: 'slide',
-                direction: 'left'
-            }
-        );
+        App.views.viewport.reveal('form');
     },
 
     save: function(params) {
