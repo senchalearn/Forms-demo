@@ -23,6 +23,10 @@ App.views.UsersList = Ext.extend(Ext.Panel, {
             itemTpl: '{name}',
             store: App.stores.users,
             emptyText: '<div class="emptytext">There are no users in the system at the moment.</div>',
+            listeners: {
+                scope: this,
+                itemtap: this.onItemtapAction
+            }
         };
 
         Ext.apply(this, {
@@ -39,6 +43,14 @@ App.views.UsersList = Ext.extend(Ext.Panel, {
         Ext.dispatch({
             controller: 'Users',
             action: 'newForm'
+        });
+    },
+
+    onItemtapAction: function(list, index, item, e) {
+        Ext.dispatch({
+            controller: 'Users',
+            action: 'editForm',
+            index: index
         });
     }
 });

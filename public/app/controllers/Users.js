@@ -25,6 +25,18 @@ Ext.regController('Users', {
 
     },
 
+    editForm: function(options) {
+        var model = this.store.getAt(options.index);
+        App.views.usersForm.load(model);
+
+        App.views.viewport.setActiveItem(
+            App.views.usersForm,
+            {
+                type: 'slide',
+                direction: 'left'
+            }
+        );
+    },
     save: function(params) {
         params.record.set(params.data);
         errors = params.record.validate()
