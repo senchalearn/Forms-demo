@@ -11,12 +11,14 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
         };
 
         titlebar = {
+            id: 'userFormTitlebar',
             xtype: 'toolbar',
             title: 'Create user',
             items: [ cancelButton ]
         };
 
         saveButton = {
+            id: 'userFormSaveButton',
             text: 'save',
             ui: 'confirm',
             handler: this.onSaveAction,
@@ -67,6 +69,19 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             dockedItems: [ titlebar, buttonbar ],
             items: [ fields ],
             listeners: {
+                beforeactivate: function() {
+                    var saveButton = this.down('#userFormSaveButton'),
+                        titlebar = this.down('#userFormTitlebar'),
+                        model = this.getRecord();
+
+                    if (model.phantom) {
+                        titlebar.setTitle('Create item');
+                        saveButton.setText('save');
+                    } else {
+                        titlebar.setTitle('Update item');
+                        saveButton.setText('update');
+                    }
+                },
                 deactivate: function() {
                     this.resetForm();
                 }
@@ -84,9 +99,11 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
     },
 
     onSaveAction: function() {
+        var model = this.getRecord();
+
         Ext.dispatch({
             controller: 'Users',
-            action: 'save',
+            action    : (model.phantom ? 'save' : 'update'),
             data      : this.getValues(),
             record    : this.getRecord(),
             form      : this

@@ -1,8 +1,4 @@
 App.stores.users = new Ext.data.Store({
     model: 'User',
-    autoLoad: true,
-    proxy: {
-        type: 'localstorage',
-        id: 'sencha-users'
-    }
+    autoLoad: true
 });

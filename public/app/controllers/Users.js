@@ -37,11 +37,23 @@ Ext.regController('Users', {
             }
         );
     },
+
     save: function(params) {
         params.record.set(params.data);
-        errors = params.record.validate()
+        var errors = params.record.validate()
         if (errors.isValid()) {
             this.store.create(params.data);
+            this.showList();
+        } else {
+            params.form.showErrors(errors);
+        }
+    },
+
+    update: function(params) {
+        params.record.set(params.data);
+        var errors = params.record.validate()
+        if (errors.isValid()) {
+            params.record.save();
             this.showList();
         } else {
             params.form.showErrors(errors);
