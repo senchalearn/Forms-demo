@@ -78,16 +78,19 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             items: [ fields ],
             listeners: {
                 beforeactivate: function() {
-                    var saveButton = this.down('#userFormSaveButton'),
+                    var deleteButton = this.down('#userFormDeleteButton'),
+                        saveButton = this.down('#userFormSaveButton'),
                         titlebar = this.down('#userFormTitlebar'),
                         model = this.getRecord();
 
                     if (model.phantom) {
                         titlebar.setTitle('Create user');
-                        saveButton.setText('save');
+                        saveButton.setText('create');
+                        deleteButton.hide();
                     } else {
                         titlebar.setTitle('Update user');
                         saveButton.setText('update');
+                        deleteButton.show();
                     }
                 },
                 deactivate: function() {
