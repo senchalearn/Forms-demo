@@ -29,9 +29,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             id: 'userFormDeleteButton',
             text: 'delete',
             ui: 'decline',
-            handler: function() {
-                Ext.Msg.confirm("Delete this user?", "", this.onDeleteAction, this);
-            },
+            handler: this.onDeleteAction,
             scope: this
         };
 
@@ -120,14 +118,16 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
         });
     },
 
-    onDeleteAction: function(confirm) {
-        if (confirm === "yes") {
-            Ext.dispatch({
-                controller: 'Users',
-                action    : 'remove',
-                record    : this.getRecord()
-            });
-        }
+    onDeleteAction: function() {
+        Ext.Msg.confirm("Delete this user?", "", function(answer) {
+            if (answer === "yes") {
+                Ext.dispatch({
+                    controller: 'Users',
+                    action    : 'remove',
+                    record    : this.getRecord()
+                });
+            }
+        }, this);
     },
 
     showErrors: function(errors) {
