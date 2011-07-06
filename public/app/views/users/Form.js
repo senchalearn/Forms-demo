@@ -75,10 +75,10 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
                         model = this.getRecord();
 
                     if (model.phantom) {
-                        titlebar.setTitle('Create item');
+                        titlebar.setTitle('Create user');
                         saveButton.setText('save');
                     } else {
-                        titlebar.setTitle('Update item');
+                        titlebar.setTitle('Update user');
                         saveButton.setText('update');
                     }
                 },
