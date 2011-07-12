@@ -19,7 +19,8 @@ Ext.regController('Users', {
 
     save: function(params) {
         params.record.set(params.data);
-        var errors = params.record.validate()
+        var errors = params.record.validate();
+
         if (errors.isValid()) {
             this.store.create(params.data);
             this.index();
@@ -29,9 +30,11 @@ Ext.regController('Users', {
     },
 
     update: function(params) {
-        params.record.set(params.data);
-        var errors = params.record.validate()
+        var tmpUser = new App.models.User(params.data),
+            errors = tmpUser.validate()
+
         if (errors.isValid()) {
+            params.record.set(params.data);
             params.record.save();
             this.index();
         } else {
