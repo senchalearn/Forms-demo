@@ -145,7 +145,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
                 errorField.show();
             }
         }, this);
-        fieldset.setInstructions("Please ammend the flagged fields");
+        fieldset.setInstructions("Please amend the flagged fields");
     },
 
     resetForm: function() {
