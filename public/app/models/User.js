@@ -9,6 +9,9 @@ App.models.User = Ext.regModel('User', {
         }, {
             name: 'email',
             type: 'string'
+        }, {
+            name: 'phone',
+            type: 'string'
         }
     ],
 
