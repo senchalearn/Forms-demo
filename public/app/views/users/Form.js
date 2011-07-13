@@ -64,6 +64,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
                 {
                     name: 'email',
                     label: 'email',
+                    xtype: 'emailfield',
                 },
                 {
                     xtype: 'App.views.ErrorField',
