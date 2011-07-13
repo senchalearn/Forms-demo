@@ -1,7 +1,7 @@
 App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
 
     initComponent: function(){
-        var titlebar, cancelButton, saveButton, fields;
+        var titlebar, cancelButton;
 
         cancelButton = {
             text: 'cancel',
