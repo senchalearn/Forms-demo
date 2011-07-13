@@ -21,6 +21,12 @@ Ext.regController('Users', {
         params.record.set(params.data);
         this.store.create(params.data);
         this.index();
+    },
+
+    update: function(params) {
+        params.record.set(params.data);
+        params.record.save();
+        this.index();
     }
 
 });
