@@ -1,4 +1,5 @@
 App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
+    defaultInstructions: 'Please enter the information above.',
 
     initComponent: function(){
         var titlebar, cancelButton, buttonbar, saveButton, fields;
@@ -35,7 +36,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             xtype: 'fieldset',
             id: 'userFormFieldset',
             title: 'User details',
-            instructions: 'Please enter the information above.',
+            instructions: this.defaultInstructions,
             defaults: {
                 xtype: 'textfield',
                 labelAlign: 'left',
@@ -92,7 +93,8 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
                         titlebar.setTitle('Update user');
                         saveButton.setText('update');
                     }
-                }
+                },
+                deactivate: function() { this.resetForm() }
             }
         });
 
@@ -132,6 +134,15 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             }
         }, this);
         fieldset.setInstructions("Please amend the flagged fields");
+    },
+
+    resetForm: function() {
+        var fieldset = this.down('#userFormFieldset');
+        this.fields.each(function(field) {
+            this.resetField(field);
+        }, this);
+        fieldset.setInstructions(this.defaultInstructions);
+        this.reset();
     },
 
     resetField: function(field) {
