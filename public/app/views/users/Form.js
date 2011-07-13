@@ -2,7 +2,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
     defaultInstructions: 'Please enter the information above.',
 
     initComponent: function(){
-        var titlebar, cancelButton, buttonbar, saveButton, fields;
+        var titlebar, cancelButton, buttonbar, saveButton, deleteButton, fields;
 
         cancelButton = {
             text: 'cancel',
@@ -26,10 +26,18 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             scope: this
         };
 
+        deleteButton = {
+            id: 'userFormDeleteButton',
+            text: 'delete',
+            ui: 'decline',
+            handler: this.onDeleteAction,
+            scope: this
+        };
+
         buttonbar = {
             xtype: 'toolbar',
             dock: 'bottom',
-            items: [{xtype: 'spacer'}, saveButton]
+            items: [deleteButton, {xtype: 'spacer'}, saveButton]
         };
 
         fields = {
@@ -82,16 +90,19 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             items: [ fields ],
             listeners: {
                 beforeactivate: function() {
-                    var saveButton = this.down('#userFormSaveButton'),
+                    var deleteButton = this.down('#userFormDeleteButton'),
+                        saveButton = this.down('#userFormSaveButton'),
                         titlebar = this.down('#userFormTitlebar'),
                         model = this.getRecord();
 
                     if (model.phantom) {
                         titlebar.setTitle('Create user');
                         saveButton.setText('create');
+                        deleteButton.hide();
                     } else {
                         titlebar.setTitle('Update user');
                         saveButton.setText('update');
+                        deleteButton.show();
                     }
                 },
                 deactivate: function() { this.resetForm() }
@@ -118,6 +129,18 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             record    : model,
             form      : this
         });
+    },
+
+    onDeleteAction: function() {
+        Ext.Msg.confirm("Delete this user?", "", function(answer) {
+            if (answer === "yes") {
+                Ext.dispatch({
+                    controller: 'Users',
+                    action    : 'remove',
+                    record    : this.getRecord()
+                });
+            }
+        }, this);
     },
 
     showErrors: function(errors) {

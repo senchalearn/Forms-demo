@@ -40,6 +40,12 @@ Ext.regController('Users', {
         } else {
             params.form.showErrors(errors);
         }
+    },
+
+    remove: function(params) {
+        this.store.remove(params.record);
+        this.store.sync();
+        this.index();
     }
 
 });
