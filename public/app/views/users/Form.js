@@ -51,14 +51,26 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
                     autoCapitalize : true
                 },
                 {
+                    xtype: 'App.views.ErrorField',
+                    fieldname: 'name',
+                },
+                {
                     name: 'email',
                     label: 'email',
                     xtype: 'emailfield',
                 },
                 {
+                    xtype: 'App.views.ErrorField',
+                    fieldname: 'email',
+                },
+                {
                     name: 'phone',
                     label: 'phone',
                     xtype: 'numberfield',
+                },
+                {
+                    xtype: 'App.views.ErrorField',
+                    fieldname: 'phone',
                 },
             ]
         };
@@ -103,6 +115,21 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             data      : this.getValues(),
             record    : model
         });
+    },
+
+    showErrors: function(errors) {
+        var fieldset = this.down('#userFormFieldset');
+        this.fields.each(function(field) {
+            var fieldErrors = errors.getByField(field.name),
+                errorField = this.down('#'+field.name+'ErrorField');
+
+            if (fieldErrors.length > 0) {
+                field.addCls('invalid-field');
+                errorField.update(fieldErrors);
+                errorField.show();
+            }
+        }, this);
+        fieldset.setInstructions("Please amend the flagged fields");
     }
 
 });
