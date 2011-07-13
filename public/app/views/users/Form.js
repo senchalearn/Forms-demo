@@ -45,10 +45,10 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             title: 'User details',
             instructions: this.defaultInstructions,
             defaults: {
-                required: false,
+                xtype: 'textfield',
                 labelAlign: 'left',
                 labelWidth: '40%',
-                xtype: 'textfield',
+                required: false,
                 useClearIcon: true,
                 autoCapitalize : false
             },
@@ -56,6 +56,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
                 {
                     name : 'name',
                     label: 'name',
+                    autoCapitalize : true
                 },
                 {
                     xtype: 'App.views.ErrorField',
