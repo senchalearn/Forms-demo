@@ -95,11 +95,13 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
     },
 
     onSaveAction: function() {
+        var model = this.getRecord();
+
         Ext.dispatch({
             controller: 'Users',
-            action    : 'save',
+            action    : (model.phantom ? 'save' : 'update'),
             data      : this.getValues(),
-            record    : this.getRecord()
+            record    : model
         });
     }
 
