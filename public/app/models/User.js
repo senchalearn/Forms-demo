@@ -15,6 +15,18 @@ App.models.User = Ext.regModel('User', {
         }
     ],
 
+    validations: [
+        {
+            type: 'presence',
+            name: 'name'
+        }, {
+            type: 'format',
+            name: 'email',
+            matcher: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+            message: 'must be a valid email'
+        }
+    ],
+
     proxy: {
         type: 'localstorage',
         id: 'sencha-users'
