@@ -115,7 +115,8 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             controller: 'Users',
             action    : (model.phantom ? 'save' : 'update'),
             data      : this.getValues(),
-            record    : model
+            record    : model,
+            form      : this
         });
     },
 
