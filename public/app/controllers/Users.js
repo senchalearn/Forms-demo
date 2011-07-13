@@ -30,9 +30,16 @@ Ext.regController('Users', {
     },
 
     update: function(params) {
-        params.record.set(params.data);
-        params.record.save();
-        this.index();
+        var tmpUser = new App.models.User(params.data),
+            errors = tmpUser.validate()
+
+        if (errors.isValid()) {
+            params.record.set(params.data);
+            params.record.save();
+            this.index();
+        } else {
+            params.form.showErrors(errors);
+        }
     }
 
 });
