@@ -79,7 +79,14 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
         });
     },
 
-    onSaveAction: function() {}
+    onSaveAction: function() {
+        Ext.dispatch({
+            controller: 'Users',
+            action    : 'save',
+            data      : this.getValues(),
+            record    : this.getRecord()
+        });
+    }
 
 });
 
