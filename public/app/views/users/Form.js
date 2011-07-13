@@ -66,7 +66,22 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
         Ext.apply(this, {
             scroll: 'vertical',
             dockedItems: [ titlebar, buttonbar ],
-            items: [ fields ]
+            items: [ fields ],
+            listeners: {
+                beforeactivate: function() {
+                    var saveButton = this.down('#userFormSaveButton'),
+                        titlebar = this.down('#userFormTitlebar'),
+                        model = this.getRecord();
+
+                    if (model.phantom) {
+                        titlebar.setTitle('Create user');
+                        saveButton.setText('create');
+                    } else {
+                        titlebar.setTitle('Update user');
+                        saveButton.setText('update');
+                    }
+                }
+            }
         });
 
         App.views.UsersForm.superclass.initComponent.call(this);
