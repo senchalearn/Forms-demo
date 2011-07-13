@@ -120,18 +120,26 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
     showErrors: function(errors) {
         var fieldset = this.down('#userFormFieldset');
         this.fields.each(function(field) {
-            var fieldErrors = errors.getByField(field.name),
-                errorField = this.down('#'+field.name+'ErrorField');
+            var fieldErrors = errors.getByField(field.name);
 
             if (fieldErrors.length > 0) {
+                var errorField = this.down('#'+field.name+'ErrorField');
                 field.addCls('invalid-field');
                 errorField.update(fieldErrors);
                 errorField.show();
+            } else {
+                this.resetField(field);
             }
         }, this);
         fieldset.setInstructions("Please amend the flagged fields");
-    }
+    },
 
+    resetField: function(field) {
+        var errorField = this.down('#'+field.name+'ErrorField');
+        errorField.hide();
+        field.removeCls('invalid-field');
+        return errorField;
+    }
 });
 
 Ext.reg('App.views.UsersForm', App.views.UsersForm);
