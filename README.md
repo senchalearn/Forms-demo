@@ -2,11 +2,11 @@
 
 First, you'll have to clone this repository:
 
-    git clone git://github.com/nelstrom/Sencha-Touch-forms-demo.git
+    git clone git://github.com/senchalearn/Forms-demo.git
 
 Change into the directory:
 
-    cd Sencha-Touch-forms-demo
+    cd Forms-demo
 
 By default, the git clone command will only create the master branch locally. If you want to study the code at each checkpoint, you will have to fetch each of the other branches. You can do so by running the following:
 
