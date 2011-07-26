@@ -2,12 +2,13 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
     defaultInstructions: 'Please enter the information above.',
 
     initComponent: function(){
-        var titlebar, cancelButton, buttonbar, saveButton, fields;
+        var titlebar, cancelButton, buttonbar, saveButton, deleteButton, fields;
 
         cancelButton = {
             text: 'cancel',
             ui: 'back',
-            handler: this.onCancelAction
+            handler: this.onCancelAction,
+            scope: this
         };
 
         titlebar = {
@@ -104,9 +105,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
                         deleteButton.show();
                     }
                 },
-                deactivate: function() {
-                    this.resetForm();
-                }
+                deactivate: function() { this.resetForm() }
             }
         });
 
@@ -127,7 +126,7 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
             controller: 'Users',
             action    : (model.phantom ? 'save' : 'update'),
             data      : this.getValues(),
-            record    : this.getRecord(),
+            record    : model,
             form      : this
         });
     },
@@ -147,13 +146,15 @@ App.views.UsersForm = Ext.extend(Ext.form.FormPanel, {
     showErrors: function(errors) {
         var fieldset = this.down('#userFormFieldset');
         this.fields.each(function(field) {
-            var fieldErrors = errors.getByField(field.name),
-                errorField = this.resetField(field);
+            var fieldErrors = errors.getByField(field.name);
 
             if (fieldErrors.length > 0) {
+                var errorField = this.down('#'+field.name+'ErrorField');
                 field.addCls('invalid-field');
                 errorField.update(fieldErrors);
                 errorField.show();
+            } else {
+                this.resetField(field);
             }
         }, this);
         fieldset.setInstructions("Please amend the flagged fields");

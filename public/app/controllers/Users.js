@@ -11,8 +11,8 @@ Ext.regController('Users', {
         App.views.viewport.reveal('usersForm');
     },
 
-    editForm: function(options) {
-        var model = this.store.getAt(options.index);
+    editForm: function(params) {
+        var model = this.store.getAt(params.index);
         App.views.usersForm.load(model);
         App.views.viewport.reveal('usersForm');
     },

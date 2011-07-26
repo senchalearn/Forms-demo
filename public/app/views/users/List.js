@@ -22,7 +22,6 @@ App.views.UsersList = Ext.extend(Ext.Panel, {
             xtype: 'list',
             itemTpl: '{name}',
             store: App.stores.users,
-            emptyText: '<div class="emptytext">There are no users in the system at the moment.</div>',
             listeners: {
                 scope: this,
                 itemtap: this.onItemtapAction
