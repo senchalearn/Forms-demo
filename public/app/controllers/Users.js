@@ -6,7 +6,7 @@ Ext.regController('Users', {
     },
 
     newForm: function() {
-        var model = new App.models.User()
+        var model = new App.models.User();
         App.views.usersForm.load(model);
         App.views.viewport.reveal('usersForm');
     },
