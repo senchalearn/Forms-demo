@@ -36,6 +36,9 @@ You can try out the demo here:
 
 * [http://sencha-forms.heroku.com/][t]
 
+![link QR code](http://qrcode.kaywa.com/img.php?s=5&d=http%3A%2F%2Fsencha-forms.heroku.com%2F)
+
+
 [t]: http://www.sencha.com/learn/working-with-forms/
 
 [00]: https://github.com/senchalearn/Forms-demo/tree/00_blank_slate
